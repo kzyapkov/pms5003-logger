@@ -3,6 +3,7 @@
 Simple Python app to collect data from PMS5003 by Plantower. Originally written by kzyapkov see https://github.com/kzyapkov/pms5003-logger
 Added possibility to send data to Domoticz.
 
+```
 user@raspberry:~/pms5003-logger$ ./pmlog.py domoticz -h
 usage: pmlog.py domoticz [-h] -ip IP_ADDRESS [-p DOMOTICZ_PORT]
                          [-m {oneshot,monitor}]
@@ -49,3 +50,4 @@ Oneshot mode (for crontab):
 sudo python ./pmlog.py  -p /dev/ttyAMA0 --enable-pin 24 --warmup-time 30 domoticz -ip 192.168.1.1 -p 8080 -m monitor --measure-period 300  --pm_1_idx 10 --pm_25_idx 11 --pm_10_idx 12 --pm_1_percent_idx 13 --pm_25_percent_idx 14 --pm_10_percent_idx 15
 Crontab example:
 */30 * * * * sudo /usr/bin/python /opt/domoticz/scripts/pmlog.py  -p /dev/ttyAMA0 --enable-pin 24 --warmup-time 30 domoticz -ip 192.168.1.1 -p 8080 -m monitor --measure-period 300  --pm_1_idx 10 --pm_25_idx 11 --pm_10_idx 12 --pm_1_percent_idx 13 --pm_25_percent_idx 14 --pm_10_percent_idx 15
+```
