@@ -41,4 +41,11 @@ optional arguments:
                         IDX of PM10 percent - if empty nothing will be
                         reported to domoticz
 
+Example usage:
+Monitor mode (for systemd service):
+sudo python ./pmlog.py  -p /dev/ttyAMA0 --enable-pin 24 --warmup-time 30 domoticz -ip 192.168.1.1 -p 8080 -m monitor --measure-period 300  --pm_1_idx 10 --pm_25_idx 11 --pm_10_idx 12 --pm_1_percent_idx 13 --pm_25_percent_idx 14 --pm_10_percent_idx 15
 
+Oneshot mode (for crontab):
+sudo python ./pmlog.py  -p /dev/ttyAMA0 --enable-pin 24 --warmup-time 30 domoticz -ip 192.168.1.1 -p 8080 -m monitor --measure-period 300  --pm_1_idx 10 --pm_25_idx 11 --pm_10_idx 12 --pm_1_percent_idx 13 --pm_25_percent_idx 14 --pm_10_percent_idx 15
+Crontab example:
+*/30 * * * * sudo /usr/bin/python /opt/domoticz/scripts/pmlog.py  -p /dev/ttyAMA0 --enable-pin 24 --warmup-time 30 domoticz -ip 192.168.1.1 -p 8080 -m monitor --measure-period 300  --pm_1_idx 10 --pm_25_idx 11 --pm_10_idx 12 --pm_1_percent_idx 13 --pm_25_percent_idx 14 --pm_10_percent_idx 15
