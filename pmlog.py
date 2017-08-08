@@ -48,7 +48,7 @@ cmd_domoticz_parser.add_argument(
         "-ip", "--ip_address", required=True,
         help="IP address of domoticz server")
 cmd_domoticz_parser.add_argument(
-        "-p", "--domoticz_port", default=8080,
+        "-p", "--port", default=8080,
         help="Port of domoticz server")
 cmd_domoticz_parser.add_argument(
         "-m", "--mode", default='oneshot', choices=['oneshot', 'monitor'],
@@ -204,17 +204,17 @@ def install_signal_handlers(sensor):
 def report_to_domoticz(packet, args):
 	
     if args.pm_1_idx:
-	    send_http_request_to_domoticz(ip=args.ip_address, port=args.domoticz_port, idx=args.pm_1_idx, idx_value=packet.pm01_atm)
+	    send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_1_idx, idx_value=packet.pm01_atm)
     if args.pm_25_idx:
-	    send_http_request_to_domoticz(ip=args.ip_address, port=args.domoticz_port, idx=args.pm_25_idx, idx_value=packet.pm2_5_atm)
+	    send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_25_idx, idx_value=packet.pm2_5_atm)
     if args.pm_10_idx:
-	    send_http_request_to_domoticz(ip=args.ip_address, port=args.domoticz_port, idx=args.pm_10_idx, idx_value=packet.pm10_atm)
+	    send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_10_idx, idx_value=packet.pm10_atm)
     if args.pm_1_percent_idx:
-	    send_http_request_to_domoticz(ip=args.ip_address, port=args.domoticz_port, idx=args.pm_1_percent_idx, idx_value=packet.pm01_atm*4)
+	    send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_1_percent_idx, idx_value=packet.pm01_atm*4)
     if args.pm_25_percent_idx:
-	    send_http_request_to_domoticz(ip=args.ip_address, port=args.domoticz_port, idx=args.pm_25_percent_idx, idx_value=packet.pm2_5_atm*4)
+	    send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_25_percent_idx, idx_value=packet.pm2_5_atm*4)
     if args.pm_10_percent_idx:
-	    send_http_request_to_domoticz(ip=args.ip_address, port=args.domoticz_port, idx=args.pm_10_percent_idx, idx_value=packet.pm10_atm*2)
+	    send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_10_percent_idx, idx_value=packet.pm10_atm*2)
 	
 def send_http_request_to_domoticz(ip, port, idx, idx_value):
     url = "http://" + ip + ":" + port +"/json.htm?type=command&param=udevice&nvalue=0&idx=" + str(idx) + "&svalue=" + str(idx_value)
@@ -243,7 +243,7 @@ def main():
         run_monitor(sensor, args)
     elif args.cmd == "oneshot":
         run_oneshot(sensor, args)
-    elif args.cmd == "domoticz" :
+    elif args.cmd == "domoticz":
         if args.mode == "monitor":
             run_monitor(sensor, args)
         elif args.mode == "oneshot":
