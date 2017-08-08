@@ -2,7 +2,7 @@
 
 Simple Python app to collect data from PMS5003 by Plantower. Originally written by kzyapkov see https://github.com/kzyapkov/pms5003-logger
 
-Added possibility to send data to Domoticz.
+Added option to send data to Domoticz.
 
 ```
 user@raspberry:~/pms5003-logger$ ./pmlog.py domoticz -h
