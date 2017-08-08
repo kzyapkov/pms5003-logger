@@ -67,13 +67,13 @@ cmd_domoticz_parser.add_argument(
         help="IDX of PM10 - if empty nothing will be reported to domoticz")
 cmd_domoticz_parser.add_argument(
         "--pm_1_percent_idx",
-        help="IDX of PM1 percent (100% is 25 ug/m3) - if empty nothing will be reported to domoticz")		
+        help="IDX of PM1 percent (100%% is 25 ug/m3) - if empty nothing will be reported to domoticz")		
 cmd_domoticz_parser.add_argument(
         "--pm_25_percent_idx",
-        help="IDX of PM2.5 percent (100% is 25 ug/m3) - if empty nothing will be reported to domoticz")	
+        help="IDX of PM2.5 percent (100%% is 25 ug/m3) - if empty nothing will be reported to domoticz")	
 cmd_domoticz_parser.add_argument(
         "--pm_10_percent_idx",
-        help="IDX of PM10 percent (100% is 50 ug/m3) - if empty nothing will be reported to domoticz")		
+        help="IDX of PM10 percent (100%% is 50 ug/m3) - if empty nothing will be reported to domoticz")		
 		
 Packet = namedtuple('Packet', [
         'pm1_std', 'pm25_std', 'pm10_std', 'pm01_atm', 'pm2_5_atm',
