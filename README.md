@@ -34,13 +34,13 @@ optional arguments:
                         IDX of PM10 - if empty nothing will be reported to
                         domoticz
   --pm_1_percent_idx PM_1_PERCENT_IDX
-                        IDX of PM1 percent - if empty nothing will be reported
+                        IDX of PM1 percent (100% is 25 ug/m3) - if empty nothing will be reported
                         to domoticz
   --pm_25_percent_idx PM_25_PERCENT_IDX
-                        IDX of PM2.5 percent - if empty nothing will be
+                        IDX of PM2.5 percent (100% is 25 ug/m3) - if empty nothing will be
                         reported to domoticz
   --pm_10_percent_idx PM_10_PERCENT_IDX
-                        IDX of PM10 percent - if empty nothing will be
+                        IDX of PM10 percent (100% is 50 ug/m3) - if empty nothing will be
                         reported to domoticz
 
 Example usage:
