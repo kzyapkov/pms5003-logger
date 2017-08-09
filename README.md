@@ -4,6 +4,10 @@ Simple Python app to collect data from PMS5003 by Plantower. Originally written 
 
 Added option to send data to Domoticz.
 
+[Instrukcja (po polsku)](https://github.com/mstojek/pms5003-logger/wiki/Raspberry-Pi-i-Domoticz-=-monitorowanie-poziomu-py%C5%82u-PM10-i-PM2.5-za-pomoc%C4%85-czujnika-PMS5003)
+
+Help fragment:  
+
 ```
 osmc@osmc:~/git/pms5003-logger$ ./pmlog.py domoticz -h
 usage: pmlog.py domoticz [-h] -ip IP_ADDRESS [-p PORT] [-m {oneshot,monitor}]
