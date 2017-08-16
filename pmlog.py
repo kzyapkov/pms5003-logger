@@ -44,10 +44,10 @@ cmd_oneshot_parser = subparsers.add_parser("oneshot")
 
 cmd_domoticz_parser = subparsers.add_parser("domoticz")
 cmd_domoticz_parser.add_argument(
-    "-ip", "--ip_address", required=True,
+    "-ip", "--domoticz-ip", required=True,
     help="IP address of domoticz server")
 cmd_domoticz_parser.add_argument(
-    "-p", "--port", default=8080,
+    "-p", "--domoticz-port", default=8080,
     help="Port of domoticz server")
 cmd_domoticz_parser.add_argument(
     "-m", "--mode", default='oneshot', choices=['oneshot', 'monitor'],
@@ -206,20 +206,20 @@ def install_signal_handlers(sensor):
 
 def report_to_domoticz(packet, args):
     if args.pm_1_idx:
-        send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_1_idx, idx_value=packet.pm01_atm)
+        send_http_request_to_domoticz(ip=args.domoticz_ip, port=args.domoticz_port, idx=args.pm_1_idx, idx_value=packet.pm01_atm)
     if args.pm_25_idx:
-        send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_25_idx,
+        send_http_request_to_domoticz(ip=args.domoticz_ip, port=args.domoticz_port, idx=args.pm_25_idx,
                                       idx_value=packet.pm2_5_atm)
     if args.pm_10_idx:
-        send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_10_idx, idx_value=packet.pm10_atm)
+        send_http_request_to_domoticz(ip=args.domoticz_ip, port=args.domoticz_port, idx=args.pm_10_idx, idx_value=packet.pm10_atm)
     if args.pm_1_percent_idx:
-        send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_1_percent_idx,
+        send_http_request_to_domoticz(ip=args.domoticz_ip, port=args.domoticz_port, idx=args.pm_1_percent_idx,
                                       idx_value=packet.pm01_atm * 4)
     if args.pm_25_percent_idx:
-        send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_25_percent_idx,
+        send_http_request_to_domoticz(ip=args.domoticz_ip, port=args.domoticz_port, idx=args.pm_25_percent_idx,
                                       idx_value=packet.pm2_5_atm * 4)
     if args.pm_10_percent_idx:
-        send_http_request_to_domoticz(ip=args.ip_address, port=args.port, idx=args.pm_10_percent_idx,
+        send_http_request_to_domoticz(ip=args.domoticz_ip, port=args.domoticz_port, idx=args.pm_10_percent_idx,
                                       idx_value=packet.pm10_atm * 2)
 
 
