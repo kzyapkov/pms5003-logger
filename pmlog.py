@@ -20,7 +20,7 @@ log = logging.getLogger()
 
 parser = argparse.ArgumentParser(description='PMS5003 data logger')
 parser.add_argument(
-    "-p", "--port", type=str, default="/dev/ttyS1",
+    "-p", "--serial-port", type=str, default="/dev/ttyS1",
     help="Serial port connected to the PMS5003 sensor")
 parser.add_argument(
     "--reset-pin", type=int, default=None,
@@ -243,7 +243,7 @@ def send_http_request_to_domoticz(ip, port, idx, idx_value):
 
 def main():
     args = parser.parse_args()
-    sensor = PMS5003(args.port, args.enable_pin, args.reset_pin)
+    sensor = PMS5003(args.serial_port, args.enable_pin, args.reset_pin)
     sensor.reset()
 
     install_signal_handlers(sensor)
