@@ -6,6 +6,7 @@ import signal
 import struct
 import logging
 import argparse
+import operator
 from collections import namedtuple
 from threading import Event
 
@@ -40,6 +41,12 @@ cmd_monitor_parser.add_argument(
         help="Seconds between measurements")
 
 cmd_oneshot_parser = subparsers.add_parser("oneshot")
+
+cmd_average_parser = subparsers.add_parser("average")
+
+cmd_average_parser.add_argument(
+        "--measurement-time", type=int, default=60*1,
+        help="For how many seconds should the measurements be taken.")
 
 
 Packet = namedtuple('Packet', [
@@ -147,6 +154,30 @@ def run_oneshot(sensor, args):
     log.info("{}".format(packet))
     sensor.disable()
 
+def run_average(sensor, args):
+    start_at = time.time()
+    num_packets = 0
+    summed_packets = Packet(*((0,) * len(Packet._fields)))
+    if args.warmup_time:
+        sensor.warmup(args.warmup_time)
+    try:
+        while not sensor.stop.is_set():
+            packet = sensor.receive_one()
+            if not packet: break
+            num_packets += 1
+            summed_packets = Packet(*tuple(map(operator.add, summed_packets, packet)))
+            if (time.time() - start_at) >= args.measurement_time:
+                sensor.stop.set()
+                break
+    except KeyboardInterrupt:
+        log.info("Bye bye.")
+    finally:
+        sensor.disable()
+        if num_packets > 0:
+            avg = Packet(*tuple(map(lambda x: x/num_packets, summed_packets)))
+            log.info(avg)
+        else: exit(1)
+
 def install_signal_handlers(sensor):
     def _sighandler(signum, frame):
         log.info("Got %s", signum)
@@ -166,6 +197,8 @@ def main():
         run_monitor(sensor, args)
     elif args.cmd == "oneshot":
         run_oneshot(sensor, args)
+    elif args.cmd == "average":
+        run_average(sensor, args)
 
 if __name__ == "__main__":
     main()
