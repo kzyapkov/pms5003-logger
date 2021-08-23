@@ -105,12 +105,12 @@ class PMS5003(object):
 
     def enable(self):
         if not self.gpio_enable: return
-        log.info("Enable sensor (via gpio %s)", self.gpio_enable.pin)
+        log.info("Enable sensor (via gpio %s)", self.gpio_enable.line)
         self.gpio_enable.write(True)
 
     def disable(self):
         if not self.gpio_enable: return
-        log.info("Disable sensor (via gpio %s)", self.gpio_enable.pin)
+        log.info("Disable sensor (via gpio %s)", self.gpio_enable.line)
         self.gpio_enable.write(False)
 
     def discard_input(self):
