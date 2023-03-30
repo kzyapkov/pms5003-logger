@@ -11,8 +11,8 @@ from threading import Event
 
 from periphery import GPIO, Serial
 
-import urllib
-import urllib2
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 
 logging.basicConfig(level=logging.DEBUG, stream=sys.stderr,
                     format='%(asctime)-15s %(levelname)-8s %(message)s')
@@ -133,10 +133,10 @@ class PMS5003(object):
     def receive_one(self):
         while not self.stop.is_set():
             c = self.port.read(1)
-            if not c or c != '\x42':
+            if not c or c != b'\x42':
                 continue
             c = self.port.read(1, .1)
-            if not c or c != '\x4d':
+            if not c or c != b'\x4d':
                 continue
 
             data = bytearray((0x42, 0x4d,))
@@ -227,18 +227,21 @@ def send_http_request_to_domoticz(ip, port, idx, idx_value):
     url = "http://" + ip + ":" + port + "/json.htm?type=command&param=udevice&nvalue=0&idx=" + str(
         idx) + "&svalue=" + str(idx_value)
     # print(url)
-    request = urllib2.Request(url)
+    request = urllib.request.Request(url)
     try:
-        response = urllib2.urlopen(request)
-    except urllib2.HTTPError, e:
+        response = urllib.request.urlopen(request)
+    except urllib.error.HTTPError as e:
         log.info('HTTPError = ' + str(e.code))
-    except urllib2.URLError, e:
+    except urllib.error.URLError as e:
         log.info('URLError = ' + str(e.reason))
     # except httplib.HTTPException, e:
     #    log.info('HTTPException')
     except Exception:
         import traceback
         log.info('generic exception: ' + traceback.format_exc())
+
+
+
 
 
 def main():
